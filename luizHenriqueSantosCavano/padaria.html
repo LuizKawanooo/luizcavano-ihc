@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Padaria Bem Bom — pães fresquinhos, doces e salgados feitos com carinho.">
+  <title>Padaria Bem Bom</title>
+  <style>
+    :root {
+      --rosa-110:#96104F; --rosa-110-escuro:#780D3F; --rosa-200:#C14475; --rosa-300:#EAA2BD; --rosa-400:#F2C8D7;
+      --rosa-500:#FFE8F8; --rosa-600:#CA99AC; --rosa-700:#E4CDDD; --vinho-100:#59132E;
+      --marrom-100:#4C1207; --ink:var(--marrom-100); --cream:var(--rosa-500);
+      --bread:var(--rosa-300); --red:var(--rosa-110-escuro); --muted:var(--vinho-100);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { min-height:100vh; display:flex; flex-direction:column; margin:0; color:var(--ink); background:var(--cream); font-family:Georgia, 'Times New Roman', serif; }
+    header { background:var(--rosa-110-escuro); }
+    .top { max-width:1120px; margin:auto; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:10px; color:var(--rosa-500); text-decoration:none; white-space:nowrap; transition:opacity .18s ease; }
+    .brand:hover { opacity:.82; }
+    .brand:focus-visible { outline:2px solid var(--rosa-400); outline-offset:4px; border-radius:4px; }
+    .brand-mark { width:44px; height:44px; display:grid; place-items:center; flex:none; border-radius:13px; background:var(--rosa-500); }
+    .brand-mark svg { width:32px; height:32px; fill:none; stroke:var(--rosa-110-escuro); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .brand-text { display:grid; line-height:1; }
+    .brand-kicker { color:var(--rosa-400); font:700 .6rem Arial,sans-serif; letter-spacing:.2em; }
+    .brand-name { margin-top:4px; font-size:1.35rem; font-weight:bold; }
+    nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px 20px; }
+    nav a { color:var(--rosa-500); font:600 .96rem Arial,sans-serif; text-decoration:none; transition:color .18s ease; }
+    nav a:hover { color:var(--rosa-400); text-decoration:underline; text-underline-offset:5px; }
+    nav a:focus-visible { outline:2px solid var(--rosa-400); outline-offset:4px; border-radius:2px; }
+    .hero { min-height:440px; display:grid; place-items:center; text-align:center; padding:72px 24px; background:linear-gradient(to bottom,var(--rosa-110-escuro),var(--rosa-300)); color:var(--rosa-500); }
+    .hero-inner { max-width:720px; text-shadow:0 2px 6px rgba(76,18,7,.65); }
+    .eyebrow { text-transform:uppercase; letter-spacing:.16em; font:700 .78rem Arial,sans-serif; }
+    h1 { margin:14px 0; font-size:clamp(2.5rem,7vw,4.7rem); line-height:1.02; }
+    .hero p { font-size:1.2rem; line-height:1.6; margin:0 auto 26px; max-width:600px; }
+    .button { display:inline-block; background:var(--red); color:var(--rosa-500); padding:13px 21px; border-radius:5px; font:700 .95rem Arial,sans-serif; text-decoration:none; text-shadow:none; transition:background-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+    .button:hover { background:var(--rosa-110); box-shadow:0 4px 12px rgba(76,18,7,.2); }
+    .button:active { transform:translateY(1px); }
+    .button:focus-visible { outline:3px solid var(--rosa-200); outline-offset:3px; }
+    main { flex:1; max-width:1120px; margin:auto; padding:64px 24px; }
+    .intro { text-align:center; max-width:680px; margin:0 auto 38px; }
+    h2 { font-size:2rem; margin:0 0 12px; }
+    .intro p,.card p { color:var(--muted); line-height:1.6; }
+    .cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+    .card { overflow:hidden; background:var(--rosa-500); border:1px solid var(--rosa-700); border-radius:9px; }
+    .card img { display:block; width:100%; height:190px; object-fit:cover; }
+    .card-content { padding:18px 20px 21px; }
+    .card-category { color:var(--red); text-transform:uppercase; letter-spacing:.12em; font:700 .68rem Arial,sans-serif; }
+    .card h3 { margin:8px 0; font-size:1.35rem; }
+    .card p { margin:0; }
+    .callout { margin-top:48px; padding:28px; border-radius:9px; background:var(--rosa-400); text-align:center; }
+    .callout p { color:var(--muted); }
+    footer { background:var(--rosa-110-escuro); color:var(--rosa-500); padding:30px 24px; }
+    .foot { max-width:1120px; margin:auto; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font: .92rem Arial,sans-serif; }
+    footer a { color:var(--rosa-500); }
+    @media(max-width:900px) { .cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:760px) { .top { align-items:flex-start; flex-direction:column; } nav { justify-content:flex-start; } .hero { min-height:380px; } }
+    @media(max-width:520px) { .cards { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <a class="brand" href="#inicio" aria-label="Padaria Bem Bom - início" aria-current="page">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M15 12c-2-2 2-3 0-5m9 4c-2-2 2-3 0-5m9 6c-2-2 2-3 0-5"/><path d="M8 27c0-7 7-13 16-13s16 6 16 13v7H8z"/><path d="M8 28h32M16 20c-2 2-3 5-3 8m12-11c-2 3-3 6-3 10m12-7c-2 2-3 5-3 8"/></svg>
+        </span>
+        <span class="brand-text"><span class="brand-kicker">PADARIA</span><span class="brand-name">Bem Bom</span></span>
+      </a>
+      <nav aria-label="Menu principal">
+        <a href="#doces">Doces</a>
+        <a href="#salgados">Salgados</a>
+        <a href="#encomendas">Encomendas</a>
+        <a href="contato.html">Contato</a>
+        <a href="trabalhe-conosco.html">Trabalhe Conosco</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="eyebrow">Feito com carinho, todos os dias</div>
+      <h1>Um pedacinho de casa em cada mordida.</h1>
+      <p>Pães quentinhos, receitas de família e aquele cheirinho bom que dá vontade de ficar.</p>
+      <a class="button" href="#doces">Conheça nosso cardápio</a>
+    </div>
+  </section>
+  <main>
+    <div class="intro">
+      <h2>Bem-vindo à nossa padaria</h2>
+      <p>Na Padaria Bem Bom, cada fornada é preparada com ingredientes selecionados e muito cuidado. Escolha algo gostoso e aproveite!</p>
+    </div>
+    <section class="cards" aria-label="Pães, bolos, doces e delivery">
+      <article class="card" id="salgados">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Pães artesanais fresquinhos" loading="lazy" decoding="async">
+        <div class="card-content"><span class="card-category">Fornada fresca</span><h3>Pães</h3><p>Pães preparados todos os dias, com aquele cheirinho irresistível.</p></div>
+      </article>
+      <article class="card" id="bolos">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Bolo decorado com cobertura e frutas" loading="lazy" decoding="async">
+        <div class="card-content"><span class="card-category">Feitos com carinho</span><h3>Bolos</h3><p>Receitas especiais para deixar qualquer momento mais gostoso.</p></div>
+      </article>
+      <article class="card" id="doces">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Sobremesa doce preparada para servir" loading="lazy" decoding="async">
+        <div class="card-content"><span class="card-category">Uma doce pausa</span><h3>Doces</h3><p>Tortas, sonhos e outras delícias para adoçar o seu dia.</p></div>
+      </article>
+      <article class="card" id="encomendas">
+        <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Entrega de pedido, imagem ilustrativa" loading="lazy" decoding="async">
+        <div class="card-content"><span class="card-category">Imagem ilustrativa</span><h3>Delivery</h3><p>Foto de entrega usada apenas para ilustrar esta página.</p></div>
+      </article>
+    </section>
+    <section class="callout">
+      <h2>Tem festa chegando?</h2>
+      <p>Deixe os quitutes com a gente e aproveite cada momento.</p>
+      <a class="button" href="#encomendas">Ver encomendas</a>
+    </section>
+  </main>
+  <footer>
+    <div class="foot"><span>© 2026 Padaria Bem Bom</span><span>Feito com carinho, servido quentinho.</span></div>
+  </footer>
+</body>
+</html>

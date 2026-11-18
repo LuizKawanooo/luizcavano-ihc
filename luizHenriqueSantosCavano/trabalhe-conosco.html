@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Envie seu currículo para a Padaria Bem Bom.">
+  <title>Trabalhe Conosco | Padaria Bem Bom</title>
+  <style>
+    :root {
+      --rosa-110:#96104F; --rosa-110-escuro:#780D3F; --rosa-200:#C14475; --rosa-300:#EAA2BD; --rosa-400:#F2C8D7;
+      --rosa-500:#FFE8F8; --rosa-600:#CA99AC; --rosa-700:#E4CDDD; --vinho-100:#59132E;
+      --marrom-100:#4C1207; --ink:var(--marrom-100); --cream:var(--rosa-500);
+      --red:var(--rosa-110-escuro); --muted:var(--vinho-100); --line:var(--rosa-700);
+    }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; display:flex; flex-direction:column; margin:0; color:var(--ink); background:var(--cream); font-family:Georgia, 'Times New Roman', serif; }
+    header { background:var(--rosa-110-escuro); }
+    .top { max-width:1120px; margin:auto; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:10px; color:var(--rosa-500); text-decoration:none; transition:opacity .18s ease; }
+    .brand:hover { opacity:.82; }
+    .brand:focus-visible { outline:2px solid var(--rosa-400); outline-offset:4px; border-radius:4px; }
+    .brand-mark { width:44px; height:44px; display:grid; place-items:center; flex:none; border-radius:13px; background:var(--rosa-500); }
+    .brand-mark svg { width:32px; height:32px; fill:none; stroke:var(--rosa-110-escuro); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .brand-text { display:grid; line-height:1; }
+    .brand-kicker { color:var(--rosa-400); font:700 .6rem Arial,sans-serif; letter-spacing:.2em; }
+    .brand-name { margin-top:4px; font-size:1.35rem; font-weight:bold; }
+    nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px 20px; }
+    nav a { color:var(--rosa-500); font:600 .96rem Arial,sans-serif; text-decoration:none; transition:color .18s ease; }
+    nav a:hover, nav a.active { color:var(--rosa-400); text-decoration:underline; text-underline-offset:5px; }
+    nav a:focus-visible { outline:2px solid var(--rosa-400); outline-offset:4px; border-radius:2px; }
+    main { flex:1; max-width:1120px; margin:auto; padding:64px 24px 72px; }
+    .page-heading { max-width:760px; margin-bottom:36px; }
+    .eyebrow { color:var(--red); text-transform:uppercase; letter-spacing:.16em; font:700 .78rem Arial,sans-serif; }
+    h1 { margin:12px 0 10px; font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.05; }
+    .page-heading p { color:var(--muted); font-size:1.1rem; line-height:1.6; margin:0; }
+    .jobs-layout { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr); gap:24px; align-items:start; }
+    .form-card, .values-card { background:var(--rosa-500); border:1px solid var(--line); border-radius:9px; }
+    .form-card { padding:32px; }
+    .form-card h2, .values-card h2 { margin:0 0 22px; font-size:1.55rem; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .form-note { grid-column:1/-1; margin:0; color:var(--muted); font: .9rem Arial,sans-serif; line-height:1.5; }
+    .form-status:empty { display:none; }
+    .form-status { grid-column:1/-1; margin:0; padding:12px 14px; border:1px solid var(--rosa-700); border-radius:5px; background:var(--rosa-400); color:var(--red); font:.9rem Arial,sans-serif; line-height:1.5; }
+    label { display:block; margin-bottom:7px; font:700 .88rem Arial,sans-serif; }
+    input, select, textarea { width:100%; border:1px solid var(--rosa-600); border-radius:5px; background:var(--rosa-500); color:var(--ink); font:1rem Arial,sans-serif; padding:12px 13px; transition:border-color .18s ease, box-shadow .18s ease; }
+    input:focus, select:focus, textarea:focus { outline:2px solid var(--rosa-110); outline-offset:1px; box-shadow:0 0 0 4px rgba(193,68,117,.15); }
+    textarea { min-height:120px; resize:vertical; }
+    .full { grid-column:1/-1; }
+    .button { border:0; cursor:pointer; display:inline-block; background:var(--red); color:var(--rosa-500); padding:13px 22px; border-radius:5px; font:700 .95rem Arial,sans-serif; text-decoration:none; transition:background-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+    .button:hover { background:var(--rosa-110); box-shadow:0 4px 12px rgba(76,18,7,.2); }
+    .button:active { transform:translateY(1px); }
+    .button:focus-visible { outline:3px solid var(--rosa-200); outline-offset:3px; }
+    .file-upload { position:relative; }
+    .file-upload input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+    .file-label { display:flex; align-items:center; gap:14px; width:100%; min-height:78px; margin:0; padding:14px 16px; border:1px dashed var(--rosa-600); border-radius:7px; background:var(--rosa-500); cursor:pointer; transition:border-color .18s ease, background-color .18s ease, transform .18s ease; }
+    .file-label:hover, .file-label:focus-within { border-color:var(--red); background:var(--rosa-400); }
+    .file-label:focus-within { outline:2px solid var(--rosa-200); outline-offset:2px; }
+    .file-label:active { transform:scale(.995); }
+    .file-label.is-selected, .file-label.is-selected:hover, .file-label.is-selected:focus-within { border:1px solid var(--red); border-radius:4px; background:var(--rosa-400); }
+    .file-label.is-selected .file-icon { color:var(--red); border-color:var(--rosa-600); background:var(--rosa-500); }
+    .file-label.is-selected .file-title { color:var(--red); }
+    .file-icon { width:46px; height:46px; display:grid; place-items:center; flex:none; border-radius:50%; background:var(--rosa-500); color:var(--red); border:1px solid var(--line); }
+    .file-icon svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .file-text { min-width:0; }
+    .file-title { display:block; color:var(--ink); font:700 .92rem Arial,sans-serif; }
+    .file-name { display:block; margin-top:4px; color:var(--muted); font:400 .82rem Arial,sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .values-card { padding:28px; }
+    .value { display:flex; gap:13px; padding:15px 0; border-top:1px solid var(--line); }
+    .value:first-of-type { border-top:0; padding-top:0; }
+    .value-icon { width:38px; height:38px; display:grid; place-items:center; flex:none; border-radius:50%; background:var(--rosa-400); color:var(--red); }
+    .value-icon svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .value h3 { margin:1px 0 4px; font-size:1rem; }
+    .value p { color:var(--muted); line-height:1.45; margin:0; }
+    footer { background:var(--rosa-110-escuro); color:var(--rosa-500); padding:30px 24px; }
+    .foot { max-width:1120px; margin:auto; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font:.92rem Arial,sans-serif; }
+    @media(max-width:760px) {
+      .top { align-items:flex-start; flex-direction:column; }
+      nav { justify-content:flex-start; }
+      main { padding-top:44px; }
+      .jobs-layout { grid-template-columns:1fr; }
+      .form-card { padding:24px 20px; }
+      .form-grid { grid-template-columns:1fr; }
+      .full { grid-column:auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <a class="brand" href="padaria.html" aria-label="Padaria Bem Bom - início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M15 12c-2-2 2-3 0-5m9 4c-2-2 2-3 0-5m9 6c-2-2 2-3 0-5"/><path d="M8 27c0-7 7-13 16-13s16 6 16 13v7H8z"/><path d="M8 28h32M16 20c-2 2-3 5-3 8m12-11c-2 3-3 6-3 10m12-7c-2 2-3 5-3 8"/></svg>
+        </span>
+        <span class="brand-text"><span class="brand-kicker">PADARIA</span><span class="brand-name">Bem Bom</span></span>
+      </a>
+      <nav aria-label="Menu principal">
+        <a href="padaria.html#doces">Doces</a>
+        <a href="padaria.html#salgados">Salgados</a>
+        <a href="padaria.html#encomendas">Encomendas</a>
+        <a href="contato.html">Contato</a>
+        <a class="active" href="trabalhe-conosco.html" aria-current="page">Trabalhe Conosco</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-heading">
+      <div class="eyebrow">Venha fazer parte da família</div>
+      <h1>Trabalhe Conosco.</h1>
+      <p>Se você gosta de cuidar das pessoas, aprender todos os dias e preparar coisas feitas com carinho, queremos conhecer você.</p>
+    </section>
+
+    <section class="jobs-layout" aria-label="Candidatura e valores da padaria">
+      <form class="form-card" id="curriculo-form">
+        <h2>Envie seu currículo</h2>
+        <div class="form-grid">
+          <p class="form-note" id="curriculo-ajuda">Todos os campos são obrigatórios. Demonstração: use dados fictícios; os dados e o currículo não são enviados nem armazenados.</p>
+          <div>
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" autocomplete="tel" required>
+          </div>
+          <div>
+            <label for="area">Área de interesse</label>
+            <select id="area" name="area" required>
+              <option value="" selected disabled>Selecione uma área</option>
+              <option>Produção e confeitaria</option>
+              <option>Atendimento</option>
+              <option>Caixa</option>
+              <option>Administrativo</option>
+              <option>Entrega</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="sobre">Conte um pouco sobre você</label>
+            <textarea id="sobre" name="sobre" placeholder="Experiência, disponibilidade e interesses..." required></textarea>
+          </div>
+          <div class="full">
+            <label for="curriculo">Currículo</label>
+            <div class="file-upload">
+              <input type="file" id="curriculo" name="curriculo" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="curriculo-ajuda" required>
+              <label class="file-label" for="curriculo">
+                <span class="file-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M5 20h14"/></svg>
+                </span>
+                <span class="file-text">
+                  <span class="file-title" id="file-title">Escolher currículo</span>
+                  <span class="file-name" id="file-name">PDF, DOC ou DOCX</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="full">
+            <button class="button" type="submit">Enviar candidatura</button>
+          </div>
+          <p class="form-status" id="candidatura-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <aside class="values-card">
+        <h2>Por que trabalhar aqui?</h2>
+        <div class="value">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5a5.5 5.5 0 0 0 1-8.9Z"/></svg>
+          </div>
+          <div><h3>Ambiente acolhedor</h3><p>Uma equipe unida, respeitosa e sempre pronta para ajudar.</p></div>
+        </div>
+        <div class="value">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <div><h3>Aprendizado constante</h3><p>Treinamento para você crescer junto com a padaria.</p></div>
+        </div>
+        <div class="value">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20V10l8-6 8 6v10"/><path d="M8 20v-6h8v6"/></svg>
+          </div>
+          <div><h3>Espírito de família</h3><p>Valorizamos as pessoas e celebramos cada conquista.</p></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot"><span>© 2026 Padaria Bem Bom</span><span>Feito com carinho, servido quentinho.</span></div>
+  </footer>
+
+  <script>
+    const curriculo = document.getElementById("curriculo");
+    const fileLabel = document.querySelector(".file-label");
+    const fileTitle = document.getElementById("file-title");
+    const fileName = document.getElementById("file-name");
+    const candidaturaStatus = document.getElementById("candidatura-status");
+
+    curriculo.addEventListener("change", function () {
+      const file = this.files && this.files[0];
+      if (!file) {
+        fileLabel.classList.remove("is-selected");
+        fileTitle.textContent = "Escolher currículo";
+        fileName.textContent = "PDF, DOC ou DOCX";
+        return;
+      }
+
+      if (!/\.(pdf|docx?)$/i.test(file.name)) {
+        this.value = "";
+        fileLabel.classList.remove("is-selected");
+        fileTitle.textContent = "Formato não aceito";
+        fileName.textContent = "Escolha um arquivo PDF, DOC ou DOCX.";
+        candidaturaStatus.textContent = "Não foi possível selecionar o arquivo. Confira os formatos aceitos.";
+        return;
+      }
+
+      fileLabel.classList.add("is-selected");
+      fileTitle.textContent = "Arquivo selecionado";
+      fileName.textContent = file.name;
+      candidaturaStatus.textContent = "";
+    });
+
+    document.getElementById("curriculo-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      candidaturaStatus.textContent =
+        "Candidatura não enviada: esta página ainda não está conectada para receber currículos.";
+    });
+  </script>
+</body>
+</html>
